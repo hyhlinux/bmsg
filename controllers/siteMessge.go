@@ -15,8 +15,8 @@ type MessgeController struct {
 
 // @Title Create
 // @Description create object
-// @Param	body		body 	models.Object	true		"The object content"
-// @Success 200 {string} models.Object.Id
+// @Param	body		body 	models.Messge	true		"The Messge content"
+// @Success 200 {string} models.Messge.Id
 // @Failure 403 body is empty
 // @router / [post]
 func (o *MessgeController) Post() {
@@ -32,9 +32,9 @@ func (o *MessgeController) Post() {
 }
 
 // @Title Get
-// @Description find msg by toUserId
+// @Description find msg by MessgeId
 // @Param	objectId		path 	string	true		"the objectid you want to get"
-// @Success 200 {object} models.Object
+// @Success 200 {object} models.Messge
 // @Failure 403 :objectId is empty
 // @router /:objectId [get]
 func (o *MessgeController) Get() {
