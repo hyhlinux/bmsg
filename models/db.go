@@ -1,16 +1,10 @@
 package models
 
 import (
-	_ "github.com/lib/pq"
 	"github.com/astaxie/beego/orm"
 	"bmsg/logger"
 	"bmsg/config"
 )
-
-func init()  {
-	InitDB()
-}
-
 
 func InitDB() {
 	err := orm.RegisterDriver("postgres", orm.DRPostgres)
@@ -20,7 +14,7 @@ func InitDB() {
 
 	pgDataSource := config.AppConf.PgDataSource
 	if pgDataSource == ""{
-		pgDataSource = "user=postgres password=postgres dbname=test host=127.0.0.1 port=5432 sslmode=disable"
+		pgDataSource = "user=postgres password=postgres dbname=postgres host=127.0.0.1 port=5432 sslmode=disable"
 	}
 	err = orm.RegisterDataBase("default", "postgres", pgDataSource)
 	if err != nil {

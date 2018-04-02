@@ -2,14 +2,19 @@ package models
 
 import (
 	"errors"
-	"bmsg/logger"
-	"time"
-	"github.com/astaxie/beego/orm"
 	"fmt"
+	"bmsg/logger"
+
+	"github.com/astaxie/beego/orm"
+	"time"
 )
 
-//const TABLENAME = "user_message"
-const TABLENAME = "user_message_test"
+const TABLENAME = "user_message"
+// Params stores the Params
+type Params map[string]interface{}
+
+// ParamsList stores paramslist
+type ParamsList []interface{}
 
 type Messge struct {
 	Id          int64          `orm:"column(id)"`
@@ -20,44 +25,39 @@ type Messge struct {
 	Title       string         `orm:"null;column(title)"`
 	Message     string         `orm:"null;column(text)"`
 	IsDelete    bool           `orm:"null;type(bool);column(is_delete);default(false)`
-	Status      string         `orm:"null;column(status);default(\"UNSEEN"\)"`
+	Status      string         `orm:"null;column(status);"`
 }
 
 func (u *Messge) TableName() string {
 	return TABLENAME
 }
 
+// TODO 后续根据统计需求修改
 // 多字段索引
 func (u *Messge) TableIndex() [][]string {
 	return [][]string{
-		[]string{"Id", "FromUserId", "ToUserId", "Status", "IsDelete"},
+		[]string{"Id", "FromUserId"},
+		[]string{"Id", "ToUserId"},
+		[]string{"Id", "CreatedAt"},
 	}
 }
 
 //type CommonTask LogCommonTask
 var (
 	ErrFetchTaskTimeout = errors.New("Fetch task timeout.")
-	dORM     orm.Ormer
+	StatusMap = map[string]string {
+		"0": "UNSEEN",
+		"1": "SEEN",
+		"UNSEEN": "UNSEEN",
+		"SEEN": "SEEN",
+		"DEF": "UNSEEN",
+	}
+	DefalutIsDelete = false
 )
 
 func init() {
 	orm.RegisterModel(new(Messge))
-	ormInit()
 }
-
-func ormInit()  {
-	dORM = NewOrm()
-}
-
-func NewOrm() orm.Ormer {
-	o := orm.NewOrm()
-	err := o.Using("default")
-	if err != nil {
-		panic(err)
-	}
-	return o
-}
-
 
 func NewMessge() *Messge {
 	return &Messge{}
@@ -65,10 +65,10 @@ func NewMessge() *Messge {
 
 func AddMessge(t *Messge) (tid int64, e error) {
 	if t == nil {
-		return 0, errors.New("AddCommonTask task is nil")
+		return 0, errors.New("AddMessge task is nil")
 	}
 
-	msg := new(Messge)
+	msg := NewMessge()
 	msg.ToUserId = t.ToUserId
 	msg.FromUserId = t.FromUserId
 	msg.Title = t.Title
@@ -76,7 +76,9 @@ func AddMessge(t *Messge) (tid int64, e error) {
 	msg.IsDelete = false
 	// 0: 未读  1: 已读
 	msg.Status = "UNSEEN"
-	_, err := dORM.Insert(msg)
+	o := orm.NewOrm()
+	o.Using("default")
+	_, err := o.Insert(msg)
 	if err != nil {
 		return tid, err
 	}
@@ -90,76 +92,110 @@ func AddMulMessge(t []*Messge) (tid int64, e error) {
 
 	msgList := make([]*Messge, len(t))
 	msgList = t
-	successNums, err := dORM.InsertMulti(100, msgList)
-	return successNums, err
+
+	o := orm.NewOrm()
+	o.Using("default")
+	tid, err := o.InsertMulti(100, msgList)
+	return tid, err
 }
 
-func GetMessge(id int64, toUserId int64, status string, isDelete bool) (msg *Messge, err error) {
-	m := Messge{Id: id, ToUserId: toUserId, Status: status, IsDelete: isDelete }
-	err = dORM.Read(&m)
-	if err == orm.ErrNoRows {
-		//logger.Debug("查询不到")
-		s := fmt.Sprintf("query not found id: %v", id)
-		return nil, errors.New(s)
-	} else if err == orm.ErrMissPK {
-		s := fmt.Sprintf("query pk err , id:%v", id)
-		return nil, errors.New(s)
-	} else {
-		logger.Debugf("id:%v", m.Id)
+// 发信人查询
+func GetMessgeByFromUserId(fromUserId int64, isDelete bool) (num int64, msgList []*Messge, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable(TABLENAME)
+	num, err = qs.Filter("from_user_id", fromUserId).Filter("is_delete", isDelete).All(&msgList)
+	if err != nil {
+		return -1, msgList, err
 	}
-	return &m, nil
+	return num, msgList, nil
+}
+
+func checkStatus(status string)  string{
+	if _, ok := StatusMap[status]; !ok {
+		status = StatusMap["DEF"]
+	}
+	return status
+}
+// 收信人查询
+func GetMessgeByToUser(toUserId int64, status string, isDelete bool) (num int64, msgList []*Messge, err error) {
+	status = checkStatus(status)
+	o := orm.NewOrm()
+	qs := o.QueryTable(TABLENAME)
+	//status 必须为SEEN/UNSEEN
+	num, err = qs.Filter("to_user_id", toUserId).Filter("status", status).Filter("is_delete", isDelete).All(&msgList)
+	if err != nil {
+		return -1, msgList, err
+	}
+
+	return num, msgList, nil
 }
 
 func GetMessgeById(id int64) (msg *Messge, err error) {
 	m := Messge{Id: id}
-
-	err = dORM.Read(&m)
+	o := orm.NewOrm()
+	o.Using("default")
+	err = o.Read(&m)
 	if err == orm.ErrNoRows {
-		//logger.Debug("查询不到")
 		s := fmt.Sprintf("query not found id: %v", id)
 		return nil, errors.New(s)
 	} else if err == orm.ErrMissPK {
-		s := fmt.Sprintf("query pk err , id:%v", id)
+		s := fmt.Sprintf("query pk err:%v", err)
 		return nil, errors.New(s)
 	} else {
 		logger.Debugf("id:%v", m.Id)
 	}
+	// todo delete
+	if m.IsDelete {
+		return nil, errors.New(fmt.Sprintf("msg id:%v is not exist", m.Id))
+	}
 	return &m, nil
 }
 
-func UpdateMessge(mid int64, mm *Messge) (a *Messge, err error) {
-	if m, err  := GetMessgeById(mid); err != nil {
-		if mm.FromUserId >= 0 {
-			m.FromUserId = mm.FromUserId
-		}
-
-		if mm.ToUserId >= 0 {
-			m.ToUserId = mm.ToUserId
-		}
-
-		if mm.Title != "" {
-			m.Title = mm.Title
-		}
-
-		if mm.Message != "" {
-			m.Message = mm.Message
-		}
-
-		_, err = dORM.Update(m)
-		if err != nil{
-			return nil, err
-		}
-		return m, nil
+func UpdateMessge(mid int64, mm *Messge) (msg *Messge, err error) {
+	m, err  := GetMessgeById(mid);
+	if err != nil {
+		return nil, errors.New(fmt.Sprintf("Msg Not Exist mid:%v err:%v", mid, err))
 	}
-	return nil, errors.New(fmt.Sprintf("Msg Not Exist mid:%v", mid))
+	// todo 是否空判断
+	if mm.FromUserId >= 0 {
+		m.FromUserId = mm.FromUserId
+	}
+
+	if mm.ToUserId >= 0 {
+		m.ToUserId = mm.ToUserId
+	}
+
+	if mm.Title != "" {
+		m.Title = mm.Title
+	}
+
+	if mm.Message != "" {
+		m.Message = mm.Message
+	}
+
+	if mm.Status != "" {
+		m.Status = mm.Status
+	}
+
+	o := orm.NewOrm()
+	o.Using("default")
+	_, err = o.Update(m)
+	if err != nil{
+		return nil, err
+	}
+	return m, nil
 }
 
 func DeleteMessge(id int64) error {
-	_, e := dORM.Update(Messge{Id: id, IsDelete: true}, "is_delete")
+	o := orm.NewOrm()
+	o.Using("default")
+	_, e := o.Update(&Messge{Id: id, IsDelete: true}, "is_delete")
 	return e
 }
 
 func AllMessge() (id int64, err error) {
-	qs := dORM.QueryTable(TABLENAME)
+	o := orm.NewOrm()
+	o.Using("default")
+	qs := o.QueryTable(TABLENAME)
 	return qs.Count()
 }
