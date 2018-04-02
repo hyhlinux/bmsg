@@ -29,8 +29,8 @@ func init() {
 }
 
 var TestData = []byte(`
-appname: log-collect
-httpport: 4008
+appname: bmsg
+httpport: 5008
 runmode: prod
 autorender: false
 copyrequestbody: true
