@@ -6,6 +6,7 @@ import (
 
 	"github.com/astaxie/beego"
 	"strconv"
+	"bmsg/logger"
 )
 
 // Operations about object
@@ -39,13 +40,18 @@ func (o *MessgeController) Post() {
 // @router /:objectId [get]
 func (o *MessgeController) Get() {
 	//touserid
-	id := o.Ctx.Input.Param(":tid")
+	id := o.Ctx.Input.Param(":objectId")
+	logger.Debugf("id:%v", id)
 	mid, err := strconv.Atoi(id)
 	if err != nil {
 		o.Data["json"] = err.Error()
 	}else{
-		models.DeleteMessge(int64(mid))
-		o.Data["json"] = "delete success!"
+		msg, err := models.GetMessgeById(int64(mid))
+		if err != nil {
+			o.Data["json"] = err.Error()
+		}else{
+			o.Data["json"] = msg
+		}
 	}
 	o.ServeJSON()
 }
