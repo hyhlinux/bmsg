@@ -16,6 +16,17 @@ type Params map[string]interface{}
 // ParamsList stores paramslist
 type ParamsList []interface{}
 
+//http json
+type MessgeJson struct {
+	Id int64   			`form:"id,omitempty"`
+	FromUserId int64    `form:"from_user_id,omitempty"`
+	ToUserId int64    	`form:"from_user_id,omitempty"`
+	Title       string         `form:"title,omitempty"`
+	Message     string         `form:"message,omitempty"`
+	Status      string         `form:"status,omitempty"`
+	IsDelete    bool         `form:"is_delete,omitempty"`
+}
+
 type Messge struct {
 	Id          int64          `orm:"column(id)"`
 	FromUserId  int64 	   		`orm:"column(from_user_id);"`
@@ -23,7 +34,7 @@ type Messge struct {
 	CreatedAt   time.Time 	   `orm:"null;auto_now_add;type(datetime);column(created_at)"`
 	UpdateAt    time.Time 	   `orm:"null;auto_now;type(datetime);column(update_at)"`
 	Title       string         `orm:"null;column(title)"`
-	Message     string         `orm:"null;column(text)"`
+	Message     string         `orm:"null;column(message)"`
 	IsDelete    bool           `orm:"null;type(bool);column(is_delete);default(false)`
 	Status      string         `orm:"null;column(status);"`
 }
