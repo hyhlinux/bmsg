@@ -1,0 +1,202 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "beego Test API",
+        "description": "beego has a very cool tools to autogenerate documents for your API",
+        "version": "1.0.0",
+        "termsOfService": "http://beego.me/",
+        "contact": {
+            "email": "astaxie@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/v1/api",
+    "paths": {
+        "/msg/": {
+            "get": {
+                "tags": [
+                    "msg"
+                ],
+                "description": "get all msg cnt",
+                "operationId": "MessgeController.GetAll",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.Messge"
+                        }
+                    },
+                    "403": {
+                        "description": ":objectId is empty"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "msg"
+                ],
+                "description": "create object",
+                "operationId": "MessgeController.Create",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The Messge content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Messge"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} models.Messge.Id"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/msg/{Id}": {
+            "put": {
+                "tags": [
+                    "msg"
+                ],
+                "description": "update the msg",
+                "operationId": "MessgeController.Update",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "objectId",
+                        "description": "The objectid you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Messge"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.Messge"
+                        }
+                    },
+                    "403": {
+                        "description": ":objectId is empty"
+                    }
+                }
+            }
+        },
+        "/msg/{id}": {
+            "delete": {
+                "tags": [
+                    "msg"
+                ],
+                "description": "delete the msg",
+                "operationId": "MessgeController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "Id",
+                        "description": "The message Id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/msg/{objectId}": {
+            "get": {
+                "tags": [
+                    "msg"
+                ],
+                "description": "find msg by MessgeId",
+                "operationId": "MessgeController.Get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "objectId",
+                        "description": "the objectid you want to get",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.Messge"
+                        }
+                    },
+                    "403": {
+                        "description": ":objectId is empty"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        ".Time": {
+            "type": "object"
+        },
+        "models.Messge": {
+            "title": "Messge",
+            "type": "object",
+            "properties": {
+                "CreatedAt": {
+                    "$ref": "#/definitions/time.Time"
+                },
+                "FromUserId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "IsDelete": {
+                    "type": "boolean"
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Title": {
+                    "type": "string"
+                },
+                "ToUserId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "UpdateAt": {
+                    "$ref": "#/definitions/time.Time"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "msg",
+            "description": "Operations about object\n"
+        }
+    ]
+}

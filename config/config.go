@@ -30,11 +30,11 @@ func init() {
 
 var TestData = []byte(`
 appname: log-collect
-httpport: 5006
+httpport: 4008
 runmode: prod
 autorender: false
 copyrequestbody: true
-grpclisten: :5006
+grpclisten: :5008
 pgdatasource: user=postgres password=postgres dbname=test host=127.0.0.1 port=5432
   sslmode=disable
 ormdebug: true
