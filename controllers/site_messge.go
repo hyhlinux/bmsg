@@ -103,7 +103,7 @@ func (o *MessgeController) Put() {
 // @Success 200 {string} delete success!
 // @Failure 403 id is empty
 // @router /:id [delete]
-func (o *MessgeController) Delete() {
+func (o *MessgeController) DeleteMessge() {
 	id := o.Ctx.Input.Param(":id")
 	mid, err := strconv.Atoi(id)
 	if err != nil {
@@ -115,3 +115,41 @@ func (o *MessgeController) Delete() {
 	o.ServeJSON()
 }
 
+// @Title UpdateMessge
+// @Description update msg
+// @Param	body		body 	models.Messge	true	"The Messge content"
+// @Param	id				query	int			true	"id"
+// @Param	from_user_id	query	int			true	"from_user_id"
+// @Param	to_user_id		query	int			true	"to_user_id"
+// @Param	title			query	string		true	"title"
+// @Param	message			query	string		true	"message"
+// @Param	status			query	int			true	"status"
+// @Param	is_delete		query	bool		true	"is_delete"
+// @Success 200 {int} models.Messge.Id
+// @Failure 400 arg is err
+// @router / [post]
+func (o *MessgeController) UpdateMessge() {
+	var argJson models.MessgeJson
+	err := o.ParseForm(&argJson)
+	if err != nil {
+		logger.Errorf("url: %v", o.Ctx.Input.URI())
+		o.Abort("400")
+		return
+	}
+
+	msg, err := models.UpdateMessge(int64(argJson.Id), &models.Messge{
+		Id: argJson.Id,
+		FromUserId: argJson.FromUserId,
+		ToUserId: argJson.ToUserId,
+		Title: argJson.Title,
+		Message: argJson.Message,
+		IsDelete: argJson.IsDelete,
+	})
+	if err != nil {
+		logger.Errorf("UpdateMessge err:%v argJson:%v", err, argJson)
+		o.Data["json"] = err.Error()
+	}else{
+		o.Data["json"] = msg
+	}
+	o.ServeJSON()
+}

@@ -20,7 +20,7 @@ type ParamsList []interface{}
 type MessgeJson struct {
 	Id int64   			`form:"id,omitempty"`
 	FromUserId int64    `form:"from_user_id,omitempty"`
-	ToUserId int64    	`form:"from_user_id,omitempty"`
+	ToUserId int64    	`form:"to_user_id,omitempty"`
 	Title       string         `form:"title,omitempty"`
 	Message     string         `form:"message,omitempty"`
 	Status      string         `form:"status,omitempty"`
