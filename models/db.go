@@ -13,11 +13,6 @@ func init()  {
 
 
 func InitDB() {
-	ormDebug := false
-	if config.AppConf.OrmDebug {
-		ormDebug = true
-	}
-	orm.Debug = ormDebug
 	err := orm.RegisterDriver("postgres", orm.DRPostgres)
 	if err != nil {
 		panic(err)
@@ -36,5 +31,10 @@ func InitDB() {
 	if err != nil {
 		panic(err)
 	}
+	ormDebug := false
+	if config.AppConf.OrmDebug {
+		ormDebug = true
+	}
+	orm.Debug = ormDebug
 	logger.Debugf("ormDebug:%v pgDataUrl:%v", ormDebug, pgDataSource)
 }

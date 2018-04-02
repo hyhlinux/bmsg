@@ -8,18 +8,19 @@ import (
 	"fmt"
 )
 
-const TABLENAME = "messge_test1"
+//const TABLENAME = "user_message"
+const TABLENAME = "user_message_test"
 
 type Messge struct {
 	Id          int64          `orm:"column(id)"`
-	FromUserId  string 	   		`orm:"column(from_user_id);"`
-	ToUserId    string 	   		`orm:"column(to_user_id);""`
+	FromUserId  int64 	   		`orm:"column(from_user_id);"`
+	ToUserId    int64 	   		`orm:"column(to_user_id);"`
 	CreatedAt   time.Time 	   `orm:"null;auto_now_add;type(datetime);column(created_at)"`
 	UpdateAt    time.Time 	   `orm:"null;auto_now;type(datetime);column(update_at)"`
 	Title       string         `orm:"null;column(title)"`
-	Text        string         `orm:"null;column(text)"`
+	Message     string         `orm:"null;column(text)"`
 	IsDelete    bool           `orm:"null;type(bool);column(is_delete);default(false)`
-	Status      int            `orm:"null;column(status);default(0)"`
+	Status      string         `orm:"null;column(status);default(\"UNSEEN"\)"`
 }
 
 func (u *Messge) TableName() string {
@@ -29,7 +30,7 @@ func (u *Messge) TableName() string {
 // 多字段索引
 func (u *Messge) TableIndex() [][]string {
 	return [][]string{
-		[]string{"FromUserId", "ToUserId", "Status", "IsDelete"},
+		[]string{"Id", "FromUserId", "ToUserId", "Status", "IsDelete"},
 	}
 }
 
@@ -40,11 +41,11 @@ var (
 )
 
 func init() {
+	orm.RegisterModel(new(Messge))
 	ormInit()
 }
 
 func ormInit()  {
-	orm.RegisterModel(new(Messge))
 	dORM = NewOrm()
 }
 
@@ -71,10 +72,10 @@ func AddMessge(t *Messge) (tid int64, e error) {
 	msg.ToUserId = t.ToUserId
 	msg.FromUserId = t.FromUserId
 	msg.Title = t.Title
-	msg.Text = t.Text
+	msg.Message = t.Message
 	msg.IsDelete = false
 	// 0: 未读  1: 已读
-	msg.Status = 0
+	msg.Status = "UNSEEN"
 	_, err := dORM.Insert(msg)
 	if err != nil {
 		return tid, err
@@ -93,7 +94,7 @@ func AddMulMessge(t []*Messge) (tid int64, e error) {
 	return successNums, err
 }
 
-func GetMessge(id int64, toUserId string, status int, isDelete bool) (msg *Messge, err error) {
+func GetMessge(id int64, toUserId int64, status string, isDelete bool) (msg *Messge, err error) {
 	m := Messge{Id: id, ToUserId: toUserId, Status: status, IsDelete: isDelete }
 	err = dORM.Read(&m)
 	if err == orm.ErrNoRows {
@@ -128,11 +129,11 @@ func GetMessgeById(id int64) (msg *Messge, err error) {
 
 func UpdateMessge(mid int64, mm *Messge) (a *Messge, err error) {
 	if m, err  := GetMessgeById(mid); err != nil {
-		if mm.FromUserId != "" {
+		if mm.FromUserId >= 0 {
 			m.FromUserId = mm.FromUserId
 		}
 
-		if mm.ToUserId != "" {
+		if mm.ToUserId >= 0 {
 			m.ToUserId = mm.ToUserId
 		}
 
@@ -140,8 +141,8 @@ func UpdateMessge(mid int64, mm *Messge) (a *Messge, err error) {
 			m.Title = mm.Title
 		}
 
-		if mm.Text != "" {
-			m.Text = mm.Text
+		if mm.Message != "" {
+			m.Message = mm.Message
 		}
 
 		_, err = dORM.Update(m)
