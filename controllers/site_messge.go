@@ -62,6 +62,7 @@ func (o *MessgeController) Get() {
 // @Failure 403 :objectId is empty
 // @router / [get]
 func (o *MessgeController) GetAll() {
+	// TODO 分页
 	// 查询 toUserId 用户的，所有消息／未读消息
 	ids, err := models.AllMessge()
 	if err != nil {

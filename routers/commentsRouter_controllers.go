@@ -9,7 +9,7 @@ func init() {
 
 	beego.GlobalControllerRouter["bmsg/controllers:FromUserIdController"] = append(beego.GlobalControllerRouter["bmsg/controllers:FromUserIdController"],
 		beego.ControllerComments{
-			Method: "Post",
+			Method: "CreateMessge",
 			Router: `/`,
 			AllowHTTPMethods: []string{"post"},
 			MethodParams: param.Make(),
@@ -17,25 +17,9 @@ func init() {
 
 	beego.GlobalControllerRouter["bmsg/controllers:FromUserIdController"] = append(beego.GlobalControllerRouter["bmsg/controllers:FromUserIdController"],
 		beego.ControllerComments{
-			Method: "GetAll",
+			Method: "ShowFromUserMessges",
 			Router: `/`,
 			AllowHTTPMethods: []string{"get"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["bmsg/controllers:FromUserIdController"] = append(beego.GlobalControllerRouter["bmsg/controllers:FromUserIdController"],
-		beego.ControllerComments{
-			Method: "Put",
-			Router: `/:Id`,
-			AllowHTTPMethods: []string{"put"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["bmsg/controllers:FromUserIdController"] = append(beego.GlobalControllerRouter["bmsg/controllers:FromUserIdController"],
-		beego.ControllerComments{
-			Method: "Delete",
-			Router: `/:id`,
-			AllowHTTPMethods: []string{"delete"},
 			MethodParams: param.Make(),
 			Params: nil})
 
@@ -60,28 +44,28 @@ func init() {
 			Method: "GetAll",
 			Router: `/`,
 			AllowHTTPMethods: []string{"get"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["bmsg/controllers:MessgeController"] = append(beego.GlobalControllerRouter["bmsg/controllers:MessgeController"],
-		beego.ControllerComments{
-			Method: "Put",
-			Router: `/:Id`,
-			AllowHTTPMethods: []string{"put"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["bmsg/controllers:MessgeController"] = append(beego.GlobalControllerRouter["bmsg/controllers:MessgeController"],
-		beego.ControllerComments{
-			Method: "Delete",
-			Router: `/:id`,
-			AllowHTTPMethods: []string{"delete"},
 			MethodParams: param.Make(),
 			Params: nil})
 
 	beego.GlobalControllerRouter["bmsg/controllers:MessgeController"] = append(beego.GlobalControllerRouter["bmsg/controllers:MessgeController"],
 		beego.ControllerComments{
 			Method: "UpdateMessge",
+			Router: `/`,
+			AllowHTTPMethods: []string{"post"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["bmsg/controllers:MessgeController"] = append(beego.GlobalControllerRouter["bmsg/controllers:MessgeController"],
+		beego.ControllerComments{
+			Method: "Put",
+			Router: `/:Id`,
+			AllowHTTPMethods: []string{"put"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["bmsg/controllers:MessgeController"] = append(beego.GlobalControllerRouter["bmsg/controllers:MessgeController"],
+		beego.ControllerComments{
+			Method: "DeleteMessge",
 			Router: `/:id`,
 			AllowHTTPMethods: []string{"delete"},
 			MethodParams: param.Make(),
@@ -97,7 +81,7 @@ func init() {
 
 	beego.GlobalControllerRouter["bmsg/controllers:ToUserIdController"] = append(beego.GlobalControllerRouter["bmsg/controllers:ToUserIdController"],
 		beego.ControllerComments{
-			Method: "Post",
+			Method: "ShowToUserMessges",
 			Router: `/`,
 			AllowHTTPMethods: []string{"post"},
 			MethodParams: param.Make(),
@@ -105,25 +89,9 @@ func init() {
 
 	beego.GlobalControllerRouter["bmsg/controllers:ToUserIdController"] = append(beego.GlobalControllerRouter["bmsg/controllers:ToUserIdController"],
 		beego.ControllerComments{
-			Method: "GetAll",
+			Method: "UpdateMessge",
 			Router: `/`,
-			AllowHTTPMethods: []string{"get"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["bmsg/controllers:ToUserIdController"] = append(beego.GlobalControllerRouter["bmsg/controllers:ToUserIdController"],
-		beego.ControllerComments{
-			Method: "Put",
-			Router: `/:Id`,
-			AllowHTTPMethods: []string{"put"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["bmsg/controllers:ToUserIdController"] = append(beego.GlobalControllerRouter["bmsg/controllers:ToUserIdController"],
-		beego.ControllerComments{
-			Method: "Delete",
-			Router: `/:id`,
-			AllowHTTPMethods: []string{"delete"},
+			AllowHTTPMethods: []string{"post"},
 			MethodParams: param.Make(),
 			Params: nil})
 

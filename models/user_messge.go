@@ -140,6 +140,19 @@ func GetMessgeByToUser(toUserId int64, status string, isDelete bool) (num int64,
 
 	return num, msgList, nil
 }
+//todo 查看某个收件人的信息
+func GetMessgeByToUserAll(toUserId, fromUserId int64, status string, isDelete bool) (num int64, msgList []*Messge, err error) {
+	status = checkStatus(status)
+	o := orm.NewOrm()
+	qs := o.QueryTable(TABLENAME)
+	//status 必须为SEEN/UNSEEN
+	num, err = qs.Filter("to_user_id", toUserId).Filter("from_user_id", fromUserId).Filter("status", status).Filter("is_delete", isDelete).All(&msgList)
+	if err != nil {
+		return -1, msgList, err
+	}
+
+	return num, msgList, nil
+}
 
 func GetMessgeById(id int64) (msg *Messge, err error) {
 	m := Messge{Id: id}

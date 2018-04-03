@@ -14,13 +14,13 @@ import (
 )
 
 func init() {
-	ns := beego.NewNamespace("/v1/api",
-		//beego.NSNamespace("/msg",
-		//	beego.NSInclude(
-		//		&controllers.MessgeController{},
-		//	),
-		//),
+	ns := beego.NewNamespace("/v1/",
 		beego.NSNamespace("/msg",
+			beego.NSInclude(
+				&controllers.MessgeController{},
+			),
+		),
+		beego.NSNamespace("/api/msg",
 			//CRUD Create(创建)、Read(读取)、Update(更新)和Delete(删除)
 			beego.NSNamespace("/create",
 				// by FromUserId 发送一封邮件
@@ -28,7 +28,7 @@ func init() {
 			),
 			beego.NSNamespace("/read",
 				//by ToUserId 查看自己收到的邮件.
-				beego.NSRouter("/to", &controllers.ToUserIdController{}, "get:ShowToUserMessges"),
+				beego.NSRouter("/to", &controllers.ToUserIdController{}, "post:ShowToUserMessges"),
 				//by FromUserId
 				beego.NSRouter("/from", &controllers.FromUserIdController{}, "get:ShowFromUserMessges"),
 			),
