@@ -143,9 +143,23 @@ localhost:5008/v1/api/msg/create
 ##### API update  统一升级为post
 ```sh
 localhost:5008/v1/api/msg/update
+{
+	"id": 20,           #mid 唯一识别msg
+    "status": "SEEN"    #状态为已读
+}
+
+// 用户只能更新status 为已读未读，不可以修改其他message 的原始信息，网站后台可以修改, 网站😨
+	msg, err := models.UpdateMessge(ob.Id, &models.Messge{
+		Id: ob.Id,
+		Status: ob.Status,
+	})
 ```
 
 ##### API delete  统一升级为post
 ```sh
-localhost:5008/v1/api/msg/delete/id
+{
+	"id": 20          # 删除
+}
+// 通过id检索，只跟新状态
+models.DeleteMessge(ob.Id);
 ```

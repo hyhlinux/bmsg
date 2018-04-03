@@ -109,13 +109,7 @@ func (o *MessgeController) UpdateMessge() {
 	logger.Debugf("argJson:%v", ob)
 	msg, err := models.UpdateMessge(ob.Id, &models.Messge{
 		Id: ob.Id,
-		//FromUserId: ob.FromUserId,
-		//ToUserId: ob.ToUserId,
-		//Title: ob.Title,
 		Status: ob.Status,
-		//Message: ob.Message,
-		// 更新接口，用户端不能更新isDelete
-		//IsDelete: ob.IsDelete,
 	})
 	if err != nil {
 		logger.Errorf("UpdateMessge err:%v argJson:%v", err, ob)
