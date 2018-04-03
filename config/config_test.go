@@ -10,7 +10,7 @@ import (
 func TestNewConf(t *testing.T) {
 	conf := AppConfInfo{
 		AppName:         "bmsg",
-		HttpPort:        5008,
+		HttpPort:        4008,
 		GrpcListen:      ":5008",
 		RunMode:         "prod",
 		AutoRender:      false,

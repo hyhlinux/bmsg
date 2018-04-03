@@ -3,8 +3,10 @@ package main
 import (
 	"bmsg/models"
 	"bmsg/controllers"
+	"bmsg/logger"
 	_ "bmsg/routers"
 	_ "github.com/lib/pq"
+	"sync"
 
 	pb "bmsg/protos"
 	"bmsg/config"
@@ -26,12 +28,23 @@ func init() {
 }
 
 func main() {
-	//if beego.BConfig.RunMode == "dev" {
-	//	beego.BConfig.WebConfig.DirectoryIndex = true
-	//	beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
-	//}
-	//beego.Run()
-	grpcStart()
+	var wg sync.WaitGroup
+	wg.Add(2)
+	go func() {
+		logger.Debug("grpc server start")
+		grpcStart()
+		logger.Debug("grpc done")
+		wg.Done()
+	}()
+	go func() {
+		logger.Debug("http server start")
+		beego.Run()
+		logger.Debug("http server done")
+		wg.Done()
+	}()
+
+	wg.Wait()
+	logger.Warn("Ser done")
 }
 
 func grpcStart() {
@@ -40,10 +53,8 @@ func grpcStart() {
 		panic(err)
 	}
 	s := grpc.NewServer()
-	fmt.Printf("Jwt servic grpc-port(%v)\n", config.AppConf.GrpcListen)
-	//grpc token
+	fmt.Printf("Message servic grpc-port(%v)\n", config.AppConf.GrpcListen)
 	pb.RegisterMessageServiceServer(s, &controllers.MsgSerController{})
-	//grpc email
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
 		panic(err)

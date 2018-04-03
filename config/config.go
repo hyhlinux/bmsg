@@ -30,7 +30,7 @@ func init() {
 
 var TestData = []byte(`
 appname: bmsg
-httpport: 5008
+httpport: 4008
 runmode: prod
 autorender: false
 copyrequestbody: true
