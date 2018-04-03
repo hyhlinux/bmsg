@@ -2,14 +2,14 @@ create table `user_message`
     -- --------------------------------------------------
     --  Table Structure for `bmsg/models.Messge`
     -- --------------------------------------------------
-    CREATE TABLE IF NOT EXISTS "user_message" (
+   CREATE TABLE IF NOT EXISTS "user_message" (
         "id" serial NOT NULL PRIMARY KEY,
         "from_user_id" bigint NOT NULL DEFAULT 0 ,
         "to_user_id" bigint NOT NULL DEFAULT 0 ,
         "created_at" timestamp with time zone,
         "update_at" timestamp with time zone,
         "title" text,
-        "text" text,
+        "message" text,
         "is_delete" bool NOT NULL DEFAULT FALSE ,
         "status" text
     );
@@ -65,3 +65,9 @@ UPDATE "user_message" SET "is_delete" = $1
 WHERE "id" = $2
 -- `true`,
 -- `10`
+
+
+﻿SELECT id, from_user_id, to_user_id, created_at, update_at, title, is_delete, status, message
+FROM public.user_message
+LIMIT 1
+OFFSET 10;
