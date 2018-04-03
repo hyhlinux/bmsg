@@ -2,11 +2,17 @@ package main
 
 import (
 	"bmsg/models"
+	"bmsg/controllers"
 	_ "bmsg/routers"
 	_ "github.com/lib/pq"
 
+	pb "bmsg/protos"
 	"bmsg/config"
 	"github.com/astaxie/beego"
+	"fmt"
+	"net"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func init() {
@@ -16,13 +22,30 @@ func init() {
 	beego.BConfig.Listen.HTTPPort = config.AppConf.HttpPort
 	beego.BConfig.WebConfig.EnableDocs = config.AppConf.EnableDocs
 	beego.BConfig.WebConfig.AutoRender = config.AppConf.AutoRender
+	models.InitDB()
 }
 
 func main() {
-	models.InitDB()
-	if beego.BConfig.RunMode == "dev" {
-		beego.BConfig.WebConfig.DirectoryIndex = true
-		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
+	//if beego.BConfig.RunMode == "dev" {
+	//	beego.BConfig.WebConfig.DirectoryIndex = true
+	//	beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
+	//}
+	//beego.Run()
+	grpcStart()
+}
+
+func grpcStart() {
+	lis, err := net.Listen("tcp", config.AppConf.GrpcListen)
+	if err != nil {
+		panic(err)
 	}
-	beego.Run()
+	s := grpc.NewServer()
+	fmt.Printf("Jwt servic grpc-port(%v)\n", config.AppConf.GrpcListen)
+	//grpc token
+	pb.RegisterMessageServiceServer(s, &controllers.MsgSerController{})
+	//grpc email
+	reflection.Register(s)
+	if err := s.Serve(lis); err != nil {
+		panic(err)
+	}
 }

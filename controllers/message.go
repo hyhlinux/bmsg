@@ -108,7 +108,7 @@ func (o *MessageController) UpdateMessage() {
 	}
 	logger.Debugf("argJson:%v", ob)
 	msg, err := models.UpdateMessage(ob.Id, &models.Message{
-		Id:     ob.Id,
+		//Id:     ob.Id,
 		Status: ob.Status,
 	})
 	if err != nil {
