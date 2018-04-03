@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 option java_package = "com.apkpure.proto";
-option java_outer_classname = "MessgeService";
+option java_outer_classname = "MessageService";
 
 package protos;
 
@@ -9,32 +9,32 @@ package protos;
 //#gw#import "google/api/annotations.proto";
 
 /*
-* MessgeService
+* MessageService
 * CURD
 */
-service MessgeService {
-    rpc MessgeCreate(Messge) returns (MessgeResponse) {
+service MessageService {
+    rpc MessageCreate(Message) returns (MessageResponse) {
         //#gw#  option (google.api.http) = {
         //#gw#  post: "/v1/msg/create"
         //#gw#  body: "*"
         //#gw#  };
     }
 
-    rpc MessgeUpdate(Messge) returns (Messge) {
+    rpc MessageUpdate(Message) returns (Message) {
         //#gw#  option (google.api.http) = {
         //#gw#  post: "/v1/msg/update"
         //#gw#  body: "*"
         //#gw#  };
     }
 
-    rpc MessgeRead(MessgeReadRequest) returns (MessgeListResponse) {
+    rpc MessageRead(MessageReadRequest) returns (MessageListResponse) {
         //#gw#  option (google.api.http) = {
         //#gw#  post: "/v1/msg/read"
         //#gw#  body: "*"
         //#gw#  };
     }
 
-    rpc MessgeDelete(MessgeDeleteRequest) returns (MessgeResponse) {
+    rpc MessageDelete(MessageDeleteRequest) returns (MessageResponse) {
         //#gw#  option (google.api.http) = {
         //#gw#  post: "/v1/msg/delete"
         //#gw#  body: "*"
@@ -42,14 +42,7 @@ service MessgeService {
     }
 }
 
-enum MessgeStatus {
-    option allow_alias = true;   //此行必须存在，否侧出错
-    UNSEEN = 0;
-    SEEN = 1;
-    ALL = 1;
-}
-
-message Messge {
+message Message {
     string id = 1;
     int64 fromUserId = 2;
     int64 toUserId = 3;
@@ -61,35 +54,35 @@ message Messge {
     bool   isDelete = 8;
 }
 
-message MessgeResponse {
+message MessageResponse {
     // 创建成功id
     string mid = 1;
 }
 
-message MessgeReadRequest {
+message MessageReadRequest {
     // 分页
     int32 pageNumber = 1;
     int32 pageSize = 2;
-    // 查询相关
+    // msgType: UNSEEN/SEEN/DETAIL/ALL
     string msgType = 3;
     int64 id = 4;
     int64 FromUserId = 5;
     int64 toUserId = 6;
     string Title = 7;
-    string Messge = 8;
+    string Message = 8;
     string status = 9;
     string isDelete = 10;
 }
 
-message MessgeListResponse {
+message MessageListResponse {
     // 数量总数
     int64 pageNumber = 1;
     int64 pageSize = 2;
     int64 nums = 3;
-    repeated Messge msgList = 4;
+    repeated Message msgList = 4;
 }
 
-message MessgeDeleteRequest {
+message MessageDeleteRequest {
     // 修改id对应的msg.is_delete true
     string id = 1;
 }

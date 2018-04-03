@@ -1,6 +1,6 @@
 create table `user_message`
     -- --------------------------------------------------
-    --  Table Structure for `bmsg/models.Messge`
+    --  Table Structure for `bmsg/models.Message`
     -- --------------------------------------------------
    CREATE TABLE IF NOT EXISTS "user_message" (
         "id" serial NOT NULL PRIMARY KEY,

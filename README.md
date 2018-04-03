@@ -149,7 +149,7 @@ localhost:5008/v1/api/msg/update
 }
 
 // 用户只能更新status 为已读未读，不可以修改其他message 的原始信息，网站后台可以修改, 网站😨
-	msg, err := models.UpdateMessge(ob.Id, &models.Messge{
+	msg, err := models.UpdateMessage(ob.Id, &models.Message{
 		Id: ob.Id,
 		Status: ob.Status,
 	})
@@ -161,5 +161,5 @@ localhost:5008/v1/api/msg/update
 	"id": 20          # 删除
 }
 // 通过id检索，只跟新状态
-models.DeleteMessge(ob.Id);
+models.DeleteMessage(ob.Id);
 ```

@@ -13,11 +13,11 @@ It is generated from these files:
 It has these top-level messages:
 	EmailRequest
 	EmailResponse
-	Messge
-	MessgeResponse
-	MessgeReadRequest
-	MessgeListResponse
-	MessgeDeleteRequest
+	Message
+	MessageResponse
+	MessageReadRequest
+	MessageListResponse
+	MessageDeleteRequest
 	GenToekenRequest
 	GenTokenResponse
 	CheckToekenRequest

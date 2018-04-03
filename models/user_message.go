@@ -19,7 +19,7 @@ type Params map[string]interface{}
 type ParamsList []interface{}
 
 //http json
-type MessgeJson struct {
+type MessageJson struct {
 	PageNumber int    `form:"pageNumber,omitempty"`
 	PageSize   int    `form:"pageSize,omitempty"`
 	MsgType    string `form:"msgType,omitempty"`
@@ -32,7 +32,7 @@ type MessgeJson struct {
 	IsDelete   bool   `form:"isDelete,omitempty"`
 }
 
-type Messge struct {
+type Message struct {
 	Id         int64     `orm:"column(id)"`
 	FromUserId int64     `orm:"column(from_user_id);"`
 	ToUserId   int64     `orm:"column(to_user_id);"`
@@ -44,13 +44,13 @@ type Messge struct {
 	Status     string    `orm:"null;column(status);"`
 }
 
-func (u *Messge) TableName() string {
+func (u *Message) TableName() string {
 	return TABLENAME
 }
 
 // TODO 后续根据统计需求修改
 // 多字段索引
-func (u *Messge) TableIndex() [][]string {
+func (u *Message) TableIndex() [][]string {
 	return [][]string{
 		[]string{"Id", "FromUserId"},
 		[]string{"Id", "ToUserId"},
@@ -74,19 +74,19 @@ var (
 )
 
 func init() {
-	orm.RegisterModel(new(Messge))
+	orm.RegisterModel(new(Message))
 }
 
-func NewMessge() *Messge {
-	return &Messge{}
+func NewMessage() *Message {
+	return &Message{}
 }
 
-func AddMessge(t *Messge) (tid int64, e error) {
+func AddMessage(t *Message) (tid int64, e error) {
 	if t == nil {
-		return 0, errors.New("AddMessge task is nil")
+		return 0, errors.New("AddMessage task is nil")
 	}
 
-	msg := NewMessge()
+	msg := NewMessage()
 	msg.ToUserId = t.ToUserId
 	msg.FromUserId = t.FromUserId
 	msg.Title = t.Title
@@ -103,12 +103,12 @@ func AddMessge(t *Messge) (tid int64, e error) {
 	return msg.Id, nil
 }
 
-func AddMulMessge(t []*Messge) (tid int64, e error) {
+func AddMulMessage(t []*Message) (tid int64, e error) {
 	if t == nil {
 		return 0, errors.New("AddCommonTask task is nil")
 	}
 
-	msgList := make([]*Messge, len(t))
+	msgList := make([]*Message, len(t))
 	msgList = t
 
 	o := orm.NewOrm()
@@ -118,7 +118,7 @@ func AddMulMessge(t []*Messge) (tid int64, e error) {
 }
 
 // 发信人查询
-func GetMessgeByFromUserId(fromUserId int64, isDelete bool) (num int64, msgList []*Messge, err error) {
+func GetMessageByFromUserId(fromUserId int64, isDelete bool) (num int64, msgList []*Message, err error) {
 	o := orm.NewOrm()
 	qs := o.QueryTable(TABLENAME)
 	num, err = qs.Filter("from_user_id", fromUserId).Filter("is_delete", isDelete).All(&msgList)
@@ -160,40 +160,40 @@ func CheckPage(pageNumber int, pageSize int) (offset int, limit int) {
 	return offset, limit
 }
 
-func ReadMessge(statusType string, id, toUserId int64, pageNumber, pageSize int) (num int64, msgList []*Messge, err error) {
+func ReadMessage(statusType string, id, toUserId int64, pageNumber, pageSize int) (num int64, msgList []*Message, err error) {
 	statusType = checkStatus(statusType)
 	switch statusType {
 	case StatusMap["DETAIL"]:
-		msg := &Messge{}
-		msg, err = GetMessgeById(id)
-		msgList = []*Messge{
+		msg := &Message{}
+		msg, err = GetMessageById(id)
+		msgList = []*Message{
 			msg,
 		}
 		break
 	default:
 		//StatusMap["ALL"], StatusMap["SEEN"], StatusMap["UNSEEN"]:
 		offset, limit := CheckPage(pageNumber, pageSize)
-		num, msgList, err = GetMessgeByToUser(toUserId, statusType, false, offset, limit)
+		num, msgList, err = GetMessageByToUser(toUserId, statusType, false, offset, limit)
 		break
 	}
 
 	return num, msgList, err
 }
 
-func ReadMessgeWithFromUserId(statusType string, id, toUserId, fromUserId int64, pageNumber, pageSize int) (num int64, msgList []*Messge, err error) {
+func ReadMessageWithFromUserId(statusType string, id, toUserId, fromUserId int64, pageNumber, pageSize int) (num int64, msgList []*Message, err error) {
 	statusType = checkStatus(statusType)
 	switch statusType {
 	case StatusMap["DETAIL"]:
-		msg := &Messge{}
-		msg, err = GetMessgeByIdWithFromUserId(id, fromUserId)
-		msgList = []*Messge{
+		msg := &Message{}
+		msg, err = GetMessageByIdWithFromUserId(id, fromUserId)
+		msgList = []*Message{
 			msg,
 		}
 		break
 	default:
 		//StatusMap["ALL"], StatusMap["SEEN"], StatusMap["UNSEEN"]:
 		offset, limit := CheckPage(pageNumber, pageSize)
-		num, msgList, err = GetMessgeByToUserAll(toUserId, fromUserId, statusType, false, offset, limit)
+		num, msgList, err = GetMessageByToUserAll(toUserId, fromUserId, statusType, false, offset, limit)
 		break
 	}
 
@@ -201,7 +201,7 @@ func ReadMessgeWithFromUserId(statusType string, id, toUserId, fromUserId int64,
 }
 
 // 收信人查询
-func GetMessgeByToUser(toUserId int64, status string, isDelete bool, offset, limit int) (num int64, msgList []*Messge, err error) {
+func GetMessageByToUser(toUserId int64, status string, isDelete bool, offset, limit int) (num int64, msgList []*Message, err error) {
 	status = checkStatus(status)
 	o := orm.NewOrm()
 	qs := o.QueryTable(TABLENAME)
@@ -216,7 +216,7 @@ func GetMessgeByToUser(toUserId int64, status string, isDelete bool, offset, lim
 	return num, msgList, nil
 }
 
-func GetMessgeByToUserAll(toUserId, fromUserId int64, status string, isDelete bool, offset, limit int) (num int64, msgList []*Messge, err error) {
+func GetMessageByToUserAll(toUserId, fromUserId int64, status string, isDelete bool, offset, limit int) (num int64, msgList []*Message, err error) {
 	status = checkStatus(status)
 	o := orm.NewOrm()
 	qs := o.QueryTable(TABLENAME)
@@ -236,8 +236,8 @@ func GetMessgeByToUserAll(toUserId, fromUserId int64, status string, isDelete bo
 /*
 不返回已经删除的msg
 */
-func GetMessgeById(id int64) (msg *Messge, err error) {
-	m := Messge{Id: id}
+func GetMessageById(id int64) (msg *Message, err error) {
+	m := Message{Id: id}
 	o := orm.NewOrm()
 	o.Using("default")
 	err = o.Read(&m)
@@ -257,8 +257,8 @@ func GetMessgeById(id int64) (msg *Messge, err error) {
 	return &m, nil
 }
 
-func GetMessgeByIdWithFromUserId(id int64, fromUserId int64) (msg *Messge, err error) {
-	m := Messge{Id: id}
+func GetMessageByIdWithFromUserId(id int64, fromUserId int64) (msg *Message, err error) {
+	m := Message{Id: id}
 	o := orm.NewOrm()
 	o.Using("default")
 	err = o.Read(&m)
@@ -281,8 +281,8 @@ func GetMessgeByIdWithFromUserId(id int64, fromUserId int64) (msg *Messge, err e
 	return &m, nil
 }
 
-func UpdateMessge(mid int64, mm *Messge) (msg *Messge, err error) {
-	m, err := GetMessgeById(mid)
+func UpdateMessage(mid int64, mm *Message) (msg *Message, err error) {
+	m, err := GetMessageById(mid)
 	if err != nil {
 		return nil, errors.New(fmt.Sprintf("Msg Not Exist mid:%v err:%v", mid, err))
 	}
@@ -316,14 +316,14 @@ func UpdateMessge(mid int64, mm *Messge) (msg *Messge, err error) {
 	return m, nil
 }
 
-func DeleteMessge(id int64) error {
+func DeleteMessage(id int64) error {
 	o := orm.NewOrm()
 	o.Using("default")
-	_, e := o.Update(&Messge{Id: id, IsDelete: true}, "is_delete")
+	_, e := o.Update(&Message{Id: id, IsDelete: true}, "is_delete")
 	return e
 }
 
-func AllMessge() (id int64, err error) {
+func AllMessage() (id int64, err error) {
 	o := orm.NewOrm()
 	o.Using("default")
 	qs := o.QueryTable(TABLENAME)
