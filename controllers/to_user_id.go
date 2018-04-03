@@ -48,6 +48,10 @@ func (o *ToUserIdController) Get() {
 // @router / [post]
 func (o *ToUserIdController) ShowToUserMessges() {
 	// 查询 toUserId 用户的，所有消息／未读消息
+	//支持从用户请求中直接数据 bind 到指定的对象,例如请求地址如下
+	var pageNumber, pageSize int
+	o.Ctx.Input.Bind(&pageNumber, "pageNumber")
+	o.Ctx.Input.Bind(&pageSize, "pageSize")
 	var argJson models.MessgeJson
 	err := o.ParseForm(&argJson)
 	if err != nil {
@@ -62,7 +66,7 @@ func (o *ToUserIdController) ShowToUserMessges() {
 	if argJson.FromUserId > 0 {
 		nums, msgList, err = models.GetMessgeByToUserAll(argJson.ToUserId, argJson.FromUserId, argJson.Status, false)
 	}else{
-		nums, msgList, err = models.GetMessgeByToUser(argJson.ToUserId, argJson.Status, false)
+		nums, msgList, err = models.GetMessgeByToUser(argJson.ToUserId, argJson.Status, false, pageNumber, pageSize)
 	}
 	if err != nil {
 		logger.Errorf("ShowToUserMessges err:%v argJson:%v", err, argJson)

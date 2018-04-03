@@ -132,7 +132,7 @@ func checkStatus(status string)  string{
 pageSize: [1:1000]
 pageNumer: [1:]
 */
-func CheckPage(pageSize, pageNumber int)  (offset int, limit int){
+func CheckPage(pageNumber int, pageSize int)  (offset int, limit int){
 	if pageSize > 1000 {
 		pageSize = 1000
 	}
@@ -154,12 +154,12 @@ func CheckPage(pageSize, pageNumber int)  (offset int, limit int){
 }
 
 // 收信人查询
-func GetMessgeByToUser(toUserId int64, status string, isDelete bool, pageSize, pageNumber int) (num int64, msgList []*Messge, err error) {
+func GetMessgeByToUser(toUserId int64, status string, isDelete bool, pageNumber, pageSize int) (num int64, msgList []*Messge, err error) {
 	status = checkStatus(status)
 	o := orm.NewOrm()
 	qs := o.QueryTable(TABLENAME)
 	//status 必须为SEEN/UNSEEN
-	offset, limit := CheckPage(pageSize, pageNumber)
+	offset, limit := CheckPage(pageNumber, pageSize)
 	//num, err = qs.Filter("to_user_id", toUserId).Filter("status", status).Filter("is_delete", isDelete).OrderBy("id").Limit(offset, limit).All(&msgList)
 	num, err = qs.Filter("to_user_id", toUserId).Filter("status", status).Filter("is_delete", isDelete).OrderBy("id").Limit(limit, offset).All(&msgList)
 	if err != nil {
