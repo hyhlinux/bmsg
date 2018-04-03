@@ -68,19 +68,17 @@ message MessgeResponse {
 
 message MessgeReadRequest {
     // 分页
-    int64 pageNumber = 1;
-    int64 pageSize = 2;
-    // 类型: UNSEEN/SEEN/ALL/DETAIL
-    string statusType = 3;
-    // 信息详情查询.
-    // 1. 查看某一条信息详情
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    // 查询相关
+    string msgType = 3;
     int64 id = 4;
-    // 收信查询.
-    // 查询的ALL/SEEN/UNSEEN/收信
-    string toUserId = 5;
-    // 发信查询.
-    // 1.查看已发信息
-    string FromUserId = 6;
+    int64 FromUserId = 5;
+    int64 toUserId = 6;
+    string Title = 7;
+    string Messge = 8;
+    string status = 9;
+    string isDelete = 10;
 }
 
 message MessgeListResponse {

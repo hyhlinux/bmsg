@@ -27,7 +27,7 @@ type GenToekenRequest struct {
 func (m *GenToekenRequest) Reset()                    { *m = GenToekenRequest{} }
 func (m *GenToekenRequest) String() string            { return proto.CompactTextString(m) }
 func (*GenToekenRequest) ProtoMessage()               {}
-func (*GenToekenRequest) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{0} }
+func (*GenToekenRequest) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{0} }
 
 func (m *GenToekenRequest) GetUid() string {
 	if m != nil {
@@ -50,7 +50,7 @@ type GenTokenResponse struct {
 func (m *GenTokenResponse) Reset()                    { *m = GenTokenResponse{} }
 func (m *GenTokenResponse) String() string            { return proto.CompactTextString(m) }
 func (*GenTokenResponse) ProtoMessage()               {}
-func (*GenTokenResponse) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{1} }
+func (*GenTokenResponse) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1} }
 
 func (m *GenTokenResponse) GetToken() string {
 	if m != nil {
@@ -66,7 +66,7 @@ type CheckToekenRequest struct {
 func (m *CheckToekenRequest) Reset()                    { *m = CheckToekenRequest{} }
 func (m *CheckToekenRequest) String() string            { return proto.CompactTextString(m) }
 func (*CheckToekenRequest) ProtoMessage()               {}
-func (*CheckToekenRequest) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{2} }
+func (*CheckToekenRequest) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{2} }
 
 func (m *CheckToekenRequest) GetToken() string {
 	if m != nil {
@@ -82,7 +82,7 @@ type CheckTokenResponse struct {
 func (m *CheckTokenResponse) Reset()                    { *m = CheckTokenResponse{} }
 func (m *CheckTokenResponse) String() string            { return proto.CompactTextString(m) }
 func (*CheckTokenResponse) ProtoMessage()               {}
-func (*CheckTokenResponse) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{3} }
+func (*CheckTokenResponse) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{3} }
 
 func (m *CheckTokenResponse) GetUid() string {
 	if m != nil {
@@ -203,9 +203,9 @@ var _TokenService_serviceDesc = grpc.ServiceDesc{
 	Metadata: "protos/token.proto",
 }
 
-func init() { proto.RegisterFile("protos/token.proto", fileDescriptor2) }
+func init() { proto.RegisterFile("protos/token.proto", fileDescriptor3) }
 
-var fileDescriptor2 = []byte{
+var fileDescriptor3 = []byte{
 	// 225 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2a, 0x28, 0xca, 0x2f,
 	0xc9, 0x2f, 0xd6, 0x2f, 0xc9, 0xcf, 0x4e, 0xcd, 0xd3, 0x03, 0x73, 0x84, 0xd8, 0x20, 0x62, 0x4a,

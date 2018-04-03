@@ -7,11 +7,17 @@ Package protos is a generated protocol buffer package.
 It is generated from these files:
 	protos/aws_email.proto
 	protos/developer.proto
+	protos/message.proto
 	protos/token.proto
 
 It has these top-level messages:
 	EmailRequest
 	EmailResponse
+	Messge
+	MessgeResponse
+	MessgeReadRequest
+	MessgeListResponse
+	MessgeDeleteRequest
 	GenToekenRequest
 	GenTokenResponse
 	CheckToekenRequest
