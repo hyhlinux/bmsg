@@ -69,6 +69,8 @@ func (o *MessageController) ReadMessage() {
 			"err":  "",
 			"nums": nums,
 			"data": msgList,
+			"pageNumber": ob.PageNumber,
+			"pageSize": ob.PageSize,
 		}
 	}
 	o.ServeJSON()
