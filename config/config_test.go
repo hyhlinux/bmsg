@@ -1,24 +1,24 @@
 package config
 
 import (
+	"github.com/astaxie/beego/logs"
 	"gopkg.in/yaml.v2"
 	iot "io/ioutil"
 	"testing"
-	"github.com/astaxie/beego/logs"
 )
 
 func TestNewConf(t *testing.T) {
 	conf := AppConfInfo{
-		AppName: "bmsg",
-		HttpPort: 5008,
-		GrpcListen: ":5008",
-		RunMode: "prod",
-		AutoRender: false,
+		AppName:         "bmsg",
+		HttpPort:        5008,
+		GrpcListen:      ":5008",
+		RunMode:         "prod",
+		AutoRender:      false,
 		CopyRequestBody: true,
-		EnableDocs: true,
-		OrmDebug: true,
-		PgDataSource: "user=postgres password=postgres dbname=test host=127.0.0.1 port=5432 sslmode=disable",
-		LogLevel: logs.LevelDebug,
+		EnableDocs:      true,
+		OrmDebug:        true,
+		PgDataSource:    "user=postgres password=postgres dbname=test host=127.0.0.1 port=5432 sslmode=disable",
+		LogLevel:        logs.LevelDebug,
 	}
 
 	data, err := yaml.Marshal(conf)

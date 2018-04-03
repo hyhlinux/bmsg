@@ -1,9 +1,9 @@
 package models
 
 import (
-	"github.com/astaxie/beego/orm"
-	"bmsg/logger"
 	"bmsg/config"
+	"bmsg/logger"
+	"github.com/astaxie/beego/orm"
 )
 
 func InitDB() {
@@ -13,7 +13,7 @@ func InitDB() {
 	}
 
 	pgDataSource := config.AppConf.PgDataSource
-	if pgDataSource == ""{
+	if pgDataSource == "" {
 		pgDataSource = "user=postgres password=postgres dbname=postgres host=127.0.0.1 port=5432 sslmode=disable"
 	}
 	err = orm.RegisterDataBase("default", "postgres", pgDataSource)

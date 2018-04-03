@@ -1,16 +1,17 @@
 package models
 
 import (
-	"errors"
-	"strings"
-	"fmt"
 	"bmsg/logger"
+	"errors"
+	"fmt"
+	"strings"
 
 	"github.com/astaxie/beego/orm"
 	"time"
 )
 
 const TABLENAME = "user_message"
+
 // Params stores the Params
 type Params map[string]interface{}
 
@@ -19,28 +20,28 @@ type ParamsList []interface{}
 
 //http json
 type MessgeJson struct {
-	PageNumber int 		`form:"pageNumber,omitempty"`
-	PageSize int		`form:"pageSize,omitempty"`
-	MsgType string      `form:"msgType,omitempty"`
-	Id int64   			`form:"id,omitempty"`
-	FromUserId int64    `form:"fromUserId,omitempty"`
-	ToUserId int64    	`form:"toUserId,omitempty"`
-	Title       string         `form:"title,omitempty"`
-	Message     string         `form:"message,omitempty"`
-	Status      string         `form:"status,omitempty"`
-	IsDelete    bool         `form:"isDelete,omitempty"`
+	PageNumber int    `form:"pageNumber,omitempty"`
+	PageSize   int    `form:"pageSize,omitempty"`
+	MsgType    string `form:"msgType,omitempty"`
+	Id         int64  `form:"id,omitempty"`
+	FromUserId int64  `form:"fromUserId,omitempty"`
+	ToUserId   int64  `form:"toUserId,omitempty"`
+	Title      string `form:"title,omitempty"`
+	Message    string `form:"message,omitempty"`
+	Status     string `form:"status,omitempty"`
+	IsDelete   bool   `form:"isDelete,omitempty"`
 }
 
 type Messge struct {
-	Id          int64          `orm:"column(id)"`
-	FromUserId  int64 	   		`orm:"column(from_user_id);"`
-	ToUserId    int64 	   		`orm:"column(to_user_id);"`
-	CreatedAt   time.Time 	   `orm:"null;auto_now_add;type(datetime);column(created_at)"`
-	UpdateAt    time.Time 	   `orm:"null;auto_now;type(datetime);column(update_at)"`
-	Title       string         `orm:"null;column(title)"`
-	Message     string         `orm:"null;column(message)"`
-	IsDelete    bool           `orm:"null;type(bool);column(is_delete);default(false)`
-	Status      string         `orm:"null;column(status);"`
+	Id         int64     `orm:"column(id)"`
+	FromUserId int64     `orm:"column(from_user_id);"`
+	ToUserId   int64     `orm:"column(to_user_id);"`
+	CreatedAt  time.Time `orm:"null;auto_now_add;type(datetime);column(created_at)"`
+	UpdateAt   time.Time `orm:"null;auto_now;type(datetime);column(update_at)"`
+	Title      string    `orm:"null;column(title)"`
+	Message    string    `orm:"null;column(message)"`
+	IsDelete   bool      `orm:"null;type(bool);column(is_delete);default(false)`
+	Status     string    `orm:"null;column(status);"`
 }
 
 func (u *Messge) TableName() string {
@@ -60,14 +61,14 @@ func (u *Messge) TableIndex() [][]string {
 //type CommonTask LogCommonTask
 var (
 	ErrFetchTaskTimeout = errors.New("Fetch task timeout.")
-	StatusMap = map[string]string {
-		"0": "UNSEEN",
-		"1": "SEEN",
+	StatusMap           = map[string]string{
+		"0":      "UNSEEN",
+		"1":      "SEEN",
 		"UNSEEN": "UNSEEN",
-		"SEEN": "SEEN",
-		"ALL": "ALL",
+		"SEEN":   "SEEN",
+		"ALL":    "ALL",
 		"DETAIL": "DETAIL",
-		"DEF": "UNSEEN",
+		"DEF":    "UNSEEN",
 	}
 	DefalutIsDelete = false
 )
@@ -127,7 +128,7 @@ func GetMessgeByFromUserId(fromUserId int64, isDelete bool) (num int64, msgList 
 	return num, msgList, nil
 }
 
-func checkStatus(status string)  string{
+func checkStatus(status string) string {
 	status = strings.ToUpper(status)
 	if _, ok := StatusMap[status]; !ok {
 		logger.Warnf("src status:%v not exit", status)
@@ -140,7 +141,7 @@ func checkStatus(status string)  string{
 pageSize: [1:1000]
 pageNumer: [1:]
 */
-func CheckPage(pageNumber int, pageSize int)  (offset int, limit int){
+func CheckPage(pageNumber int, pageSize int) (offset int, limit int) {
 	if pageSize > 1000 {
 		pageSize = 1000
 	}
@@ -153,7 +154,7 @@ func CheckPage(pageNumber int, pageSize int)  (offset int, limit int){
 	}
 
 	limit = pageSize
-	offset = (pageNumber-1)*pageSize
+	offset = (pageNumber - 1) * pageSize
 	// todo delete
 	logger.Debugf("offset:%v limit:%v", offset, limit)
 	return offset, limit
@@ -281,7 +282,7 @@ func GetMessgeByIdWithFromUserId(id int64, fromUserId int64) (msg *Messge, err e
 }
 
 func UpdateMessge(mid int64, mm *Messge) (msg *Messge, err error) {
-	m, err := GetMessgeById(mid);
+	m, err := GetMessgeById(mid)
 	if err != nil {
 		return nil, errors.New(fmt.Sprintf("Msg Not Exist mid:%v err:%v", mid, err))
 	}
@@ -309,7 +310,7 @@ func UpdateMessge(mid int64, mm *Messge) (msg *Messge, err error) {
 	o := orm.NewOrm()
 	o.Using("default")
 	_, err = o.Update(m)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 	return m, nil

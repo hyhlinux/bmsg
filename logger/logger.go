@@ -1,8 +1,8 @@
 package logger
 
 import (
-	"fmt"
 	"bmsg/config"
+	"fmt"
 	"github.com/astaxie/beego/logs"
 )
 

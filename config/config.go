@@ -2,24 +2,24 @@ package config
 
 import (
 	"encoding/json"
-	"strings"
 	"errors"
+	"fmt"
 	"gopkg.in/yaml.v2"
 	iot "io/ioutil"
-	"fmt"
+	"strings"
 )
 
 type AppConfInfo struct {
-	AppName string `yml:"app_name" json:"app_name"`
-	HttpPort int `yml:"http_port" json:"http_port"`
-	RunMode string `yml:"run_mode" json:"run_mode"`
-	AutoRender bool `yml:"auto_render" json:"auto_render"`
-	CopyRequestBody bool `yml:"copy_request_body" json:"copy_request_body"`
-	GrpcListen string `yml:"grpc_listen" json:"grpc_listen"`
-	PgDataSource string `yml:"pg_data_source" json:"pg_data_source"`
-	OrmDebug bool `yml:"orm_debug" json:"orm_debug"`
-	EnableDocs bool `yml:"enable_docs" json:"enable_docs"`
-	LogLevel int `yml:"log_level" json:"log_level"`
+	AppName         string `yml:"app_name" json:"app_name"`
+	HttpPort        int    `yml:"http_port" json:"http_port"`
+	RunMode         string `yml:"run_mode" json:"run_mode"`
+	AutoRender      bool   `yml:"auto_render" json:"auto_render"`
+	CopyRequestBody bool   `yml:"copy_request_body" json:"copy_request_body"`
+	GrpcListen      string `yml:"grpc_listen" json:"grpc_listen"`
+	PgDataSource    string `yml:"pg_data_source" json:"pg_data_source"`
+	OrmDebug        bool   `yml:"orm_debug" json:"orm_debug"`
+	EnableDocs      bool   `yml:"enable_docs" json:"enable_docs"`
+	LogLevel        int    `yml:"log_level" json:"log_level"`
 }
 
 var AppConf *AppConfInfo

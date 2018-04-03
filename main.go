@@ -2,8 +2,8 @@ package main
 
 import (
 	"bmsg/models"
-	_ "github.com/lib/pq"
 	_ "bmsg/routers"
+	_ "github.com/lib/pq"
 
 	"bmsg/config"
 	"github.com/astaxie/beego"
@@ -26,5 +26,3 @@ func main() {
 	}
 	beego.Run()
 }
-
-
