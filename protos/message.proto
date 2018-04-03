@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 option java_package = "com.apkpure.proto";
-option java_outer_classname = "MessageService";
+option java_outer_classname = "MessgeService";
 
 package protos;
 
@@ -9,30 +9,89 @@ package protos;
 //#gw#import "google/api/annotations.proto";
 
 /*
-* MessageService
+* MessgeService
 * CURD
 */
-service MessageService {
-    // 1. 查询接口
-    rpc MessageApi(MessageApiRequest) returns (MessageApiResponse) {
+service MessgeService {
+    rpc MessgeCreate(Messge) returns (MessgeResponse) {
         //#gw#  option (google.api.http) = {
-        //#gw#  post: "/v1/msg"
+        //#gw#  post: "/v1/msg/create"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+
+    rpc MessgeUpdate(Messge) returns (Messge) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/msg/update"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+
+    rpc MessgeRead(MessgeReadRequest) returns (MessgeListResponse) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/msg/read"
+        //#gw#  body: "*"
+        //#gw#  };
+    }
+
+    rpc MessgeDelete(MessgeDeleteRequest) returns (MessgeResponse) {
+        //#gw#  option (google.api.http) = {
+        //#gw#  post: "/v1/msg/delete"
         //#gw#  body: "*"
         //#gw#  };
     }
 }
 
-
-message MessageApiRequest {
-    // CURD: CREATE//UPDATE/READ/DELETE
-    string method = 1;
-    // 过期时间戳，单位s
-    string query = 2;
+enum MessgeStatus {
+    option allow_alias = true;   //此行必须存在，否侧出错
+    UNSEEN = 0;
+    SEEN = 1;
+    ALL = 1;
 }
 
-message MessageApiResponse {
-    // CURD: FIND/INSERT/UPDATE/DELETE
-    string err = 1;
-    // 过期时间戳，单位s
-    string data = 2;
+message Messge {
+    string id = 1;
+    int64 fromUserId = 2;
+    int64 toUserId = 3;
+    // 时间戳ms
+    int64 createdAt = 4;
+    string title = 5;
+    string message = 6;
+    string status = 7;
+    bool   isDelete = 8;
+}
+
+message MessgeResponse {
+    // 创建成功id
+    string mid = 1;
+}
+
+message MessgeReadRequest {
+    // 分页
+    int64 pageNumber = 1;
+    int64 pageSize = 2;
+    // 类型: UNSEEN/SEEN/ALL/DETAIL
+    string statusType = 3;
+    // 信息详情查询.
+    // 1. 查看某一条信息详情
+    int64 id = 4;
+    // 收信查询.
+    // 查询的ALL/SEEN/UNSEEN/收信
+    string toUserId = 5;
+    // 发信查询.
+    // 1.查看已发信息
+    string FromUserId = 6;
+}
+
+message MessgeListResponse {
+    // 数量总数
+    int64 pageNumber = 1;
+    int64 pageSize = 2;
+    int64 nums = 3;
+    repeated Messge msgList = 4;
+}
+
+message MessgeDeleteRequest {
+    // 修改id对应的msg.is_delete true
+    string id = 1;
 }

@@ -5,10 +5,16 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change beforePath="$PROJECT_DIR$/bmsg" afterPath="$PROJECT_DIR$/bmsg" />
-      <change beforePath="$PROJECT_DIR$/controllers/to_user_id.go" afterPath="$PROJECT_DIR$/controllers/to_user_id.go" />
+      <change beforePath="$PROJECT_DIR$/controllers/from_user_id.go" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/controllers/site_messge.go" afterPath="$PROJECT_DIR$/controllers/site_messge.go" />
+      <change beforePath="$PROJECT_DIR$/controllers/to_user_id.go" afterPath="" />
       <change beforePath="$PROJECT_DIR$/lastupdate.tmp" afterPath="$PROJECT_DIR$/lastupdate.tmp" />
       <change beforePath="$PROJECT_DIR$/models/user_messge.go" afterPath="$PROJECT_DIR$/models/user_messge.go" />
-      <change beforePath="$PROJECT_DIR$/routers/commentsRouter___________________Users_apple_go-dev_src_bmsg_controllers.go" afterPath="$PROJECT_DIR$/routers/commentsRouter___________________Users_apple_go-dev_src_bmsg_controllers.go" />
+      <change beforePath="$PROJECT_DIR$/models/user_msg.sql" afterPath="$PROJECT_DIR$/models/user_msg.sql" />
+      <change beforePath="$PROJECT_DIR$/protos/message.proto" afterPath="$PROJECT_DIR$/protos/message.proto" />
+      <change beforePath="$PROJECT_DIR$/routers/commentsRouter___________________Users_apple_go-dev_src_bmsg_controllers.go" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/routers/commentsRouter_controllers.go" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/routers/router.go" afterPath="$PROJECT_DIR$/routers/router.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,31 +40,46 @@
       <file leaf-file-name="site_messge.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/site_messge.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+            <state relative-caret-position="251">
+              <caret line="109" column="29" lean-forward="false" selection-start-line="109" selection-start-column="29" selection-end-line="109" selection-end-column="29" />
               <folding>
-                <element signature="e#21#118#0" expanded="true" />
+                <element signature="e#21#114#0" expanded="true" />
+                <element signature="n#!!block;n#ReadMessge#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="to_user_id.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/to_user_id.go">
+      <file leaf-file-name="user_messge.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/user_messge.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="68" column="45" lean-forward="false" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
+            <state relative-caret-position="553">
+              <caret line="321" column="11" lean-forward="false" selection-start-line="321" selection-start-column="11" selection-end-line="321" selection-end-column="11" />
+              <folding>
+                <element signature="e#16#110#0" expanded="true" />
+                <element signature="n#!!block;n#GetMessgeByIdWithFromUserId#0" expanded="false" />
+                <element signature="n#!!block;n#AllMessge#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="router.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/routers/router.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="369">
+              <caret line="29" column="32" lean-forward="false" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="254">
-                <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <first_editor relative-caret-position="532">
+                <caret line="149" column="34" lean-forward="false" selection-start-line="149" selection-start-column="34" selection-end-line="149" selection-end-column="34" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -71,54 +92,8 @@
       <file leaf-file-name="db_test.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/db_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="164" column="25" lean-forward="false" selection-start-line="164" selection-start-column="25" selection-end-line="164" selection-end-column="25" />
-              <folding>
-                <element signature="e#16#92#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user_messge.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/user_messge.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="151" column="22" lean-forward="false" selection-start-line="151" selection-start-column="22" selection-end-line="151" selection-end-column="22" />
-              <folding>
-                <element signature="e#16#99#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="default_test.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/default_test.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="22" column="37" lean-forward="false" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="46" />
-              <folding>
-                <element signature="e#14#189#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="types.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/github.com/astaxie/beego/orm/types.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="164" column="4" lean-forward="false" selection-start-line="164" selection-start-column="4" selection-end-line="164" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="orm_test.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/github.com/astaxie/beego/orm/orm_test.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="936" column="20" lean-forward="false" selection-start-line="936" selection-start-column="20" selection-end-line="936" selection-end-column="20" />
+            <state relative-caret-position="456">
+              <caret line="187" column="9" lean-forward="false" selection-start-line="187" selection-start-column="9" selection-end-line="187" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -127,18 +102,18 @@
       <file leaf-file-name="user_msg.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/user_msg.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="72" column="9" lean-forward="false" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
+            <state relative-caret-position="492">
+              <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="db.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/db.go">
+      <file leaf-file-name="types.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/github.com/astaxie/beego/orm/types.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="236">
+              <caret line="127" column="11" lean-forward="false" selection-start-line="127" selection-start-column="11" selection-end-line="127" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -184,16 +159,16 @@
         <option value="$PROJECT_DIR$/models/test/msg.sql" />
         <option value="$PROJECT_DIR$/config/config.go" />
         <option value="$PROJECT_DIR$/controllers/siteMessge.go" />
-        <option value="$PROJECT_DIR$/routers/router.go" />
-        <option value="$PROJECT_DIR$/controllers/from_user_id.go" />
-        <option value="$PROJECT_DIR$/controllers/site_messge.go" />
-        <option value="$PROJECT_DIR$/protos/message.proto" />
-        <option value="$PROJECT_DIR$/models/user_msg.sql" />
-        <option value="$PROJECT_DIR$/models/db_test.go" />
-        <option value="$PROJECT_DIR$/controllers/to_user_id.go" />
-        <option value="$PROJECT_DIR$/models/user_messge.go" />
         <option value="$PROJECT_DIR$/tests/default_test.go" />
+        <option value="$PROJECT_DIR$/protos/message.proto" />
+        <option value="$PROJECT_DIR$/models/db_test.go" />
+        <option value="$PROJECT_DIR$/models/user_msg.sql" />
+        <option value="$PROJECT_DIR$/controllers/to_user_id.go" />
+        <option value="$PROJECT_DIR$/controllers/from_user_id.go" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/models/user_messge.go" />
+        <option value="$PROJECT_DIR$/controllers/site_messge.go" />
+        <option value="$PROJECT_DIR$/routers/router.go" />
       </list>
     </option>
   </component>
@@ -245,6 +220,16 @@
             <path>
               <item name="bmsg" type="b2602c69:ProjectViewProjectNode" />
               <item name="bmsg" type="462c0819:PsiDirectoryNode" />
+              <item name="protos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bmsg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bmsg" type="462c0819:PsiDirectoryNode" />
+              <item name="routers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bmsg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bmsg" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -279,16 +264,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.TestGet in default_test.go">
-    <configuration name="TestAddMessage in db_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
-      <module name="bmsg" />
-      <working_directory value="$PROJECT_DIR$/models" />
-      <go_parameters value="-i" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="bmsg/models" />
-      <pattern value="^TestAddMessage$" />
-    </configuration>
+  <component name="RunManager" selected="Go Test.TestReadMessgeWithFromUserId in db_test.go">
     <configuration name="TestAddMulMessge in db_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
       <module name="bmsg" />
       <working_directory value="$PROJECT_DIR$/models" />
@@ -325,20 +301,29 @@
       <package value="bmsg/models" />
       <pattern value="^TestGetMessgeByToUser$" />
     </configuration>
+    <configuration name="TestReadMessgeWithFromUserId in db_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
+      <module name="bmsg" />
+      <working_directory value="$PROJECT_DIR$/models" />
+      <go_parameters value="-i" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="bmsg/models" />
+      <pattern value="^TestReadMessgeWithFromUserId$" />
+    </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Go Test.TestAddMessage in db_test.go" />
-      <item index="1" class="java.lang.String" itemvalue="Go Test.TestAddMulMessge in db_test.go" />
-      <item index="2" class="java.lang.String" itemvalue="Go Test.TestCheckPage in db_test.go" />
-      <item index="3" class="java.lang.String" itemvalue="Go Test.TestGetMessgeByToUser in db_test.go" />
-      <item index="4" class="java.lang.String" itemvalue="Go Test.TestGet in default_test.go" />
+      <item index="0" class="java.lang.String" itemvalue="Go Test.TestAddMulMessge in db_test.go" />
+      <item index="1" class="java.lang.String" itemvalue="Go Test.TestCheckPage in db_test.go" />
+      <item index="2" class="java.lang.String" itemvalue="Go Test.TestGetMessgeByToUser in db_test.go" />
+      <item index="3" class="java.lang.String" itemvalue="Go Test.TestGet in default_test.go" />
+      <item index="4" class="java.lang.String" itemvalue="Go Test.TestReadMessgeWithFromUserId in db_test.go" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Go Test.TestGet in default_test.go" />
-        <item index="1" class="java.lang.String" itemvalue="Go Test.TestCheckPage in db_test.go" />
-        <item index="2" class="java.lang.String" itemvalue="Go Test.TestGetMessgeByToUser in db_test.go" />
-        <item index="3" class="java.lang.String" itemvalue="Go Test.TestAddMulMessge in db_test.go" />
-        <item index="4" class="java.lang.String" itemvalue="Go Test.TestAddMessage in db_test.go" />
+        <item index="0" class="java.lang.String" itemvalue="Go Test.TestReadMessgeWithFromUserId in db_test.go" />
+        <item index="1" class="java.lang.String" itemvalue="Go Test.TestGet in default_test.go" />
+        <item index="2" class="java.lang.String" itemvalue="Go Test.TestCheckPage in db_test.go" />
+        <item index="3" class="java.lang.String" itemvalue="Go Test.TestGetMessgeByToUser in db_test.go" />
+        <item index="4" class="java.lang.String" itemvalue="Go Test.TestAddMulMessge in db_test.go" />
       </list>
     </recent_temporary>
   </component>
@@ -346,9 +331,6 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestCheckPage_in_db_test_go - 2018.04.03 at 11h 01m 40s.xml">
-      <configuration name="TestCheckPage in db_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="TestCheckPage_in_db_test_go - 2018.04.03 at 11h 02m 49s.xml">
       <configuration name="TestCheckPage in db_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -376,25 +358,27 @@
     <history-entry file="TestGet_in_default_test_go - 2018.04.03 at 11h 21m 39s.xml">
       <configuration name="TestGet in default_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="TestReadMessgeWithFromUserId_in_db_test_go - 2018.04.03 at 15h 19m 29s.xml">
+      <configuration name="TestReadMessgeWithFromUserId in db_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="23" width="1867" height="1057" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15123288" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16986302" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="150" y="123" width="1670" height="857" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24920128" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38019168" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2257721" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2736954" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33013844" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="150" y="123" width="1670" height="857" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -427,7 +411,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/models/user_messge.go</url>
-          <line>243</line>
+          <line>320</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
@@ -435,23 +419,8 @@
           <line>81</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/controllers/site_messge.go</url>
-          <line>44</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/controllers/site_messge.go</url>
-          <line>55</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/controllers/site_messge.go</url>
-          <line>66</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="13" />
+      <option name="time" value="14" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -461,7 +430,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#21#118#0" expanded="true" />
+            <element signature="e#21#114#0" expanded="true" />
+            <element signature="n#!!block;n#ReadMessge#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -470,9 +440,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1064">
           <caret line="63" column="50" lean-forward="false" selection-start-line="63" selection-start-column="50" selection-end-line="63" selection-end-column="50" />
-          <folding>
-            <element signature="e#21#118#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -481,7 +449,9 @@
         <state relative-caret-position="3116">
           <caret line="164" column="5" lean-forward="false" selection-start-line="164" selection-start-column="5" selection-end-line="164" selection-end-column="5" />
           <folding>
-            <element signature="e#16#99#0" expanded="true" />
+            <element signature="e#16#110#0" expanded="true" />
+            <element signature="n#!!block;n#GetMessgeByIdWithFromUserId#0" expanded="false" />
+            <element signature="n#!!block;n#AllMessge#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -490,9 +460,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="722">
           <caret line="44" column="46" lean-forward="false" selection-start-line="44" selection-start-column="46" selection-end-line="44" selection-end-column="46" />
-          <folding>
-            <element signature="e#21#101#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -501,7 +469,8 @@
         <state relative-caret-position="950">
           <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding>
-            <element signature="e#21#118#0" expanded="true" />
+            <element signature="e#21#114#0" expanded="true" />
+            <element signature="n#!!block;n#ReadMessge#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -511,7 +480,9 @@
         <state relative-caret-position="2508">
           <caret line="132" column="5" lean-forward="false" selection-start-line="132" selection-start-column="5" selection-end-line="132" selection-end-column="5" />
           <folding>
-            <element signature="e#16#99#0" expanded="true" />
+            <element signature="e#16#110#0" expanded="true" />
+            <element signature="n#!!block;n#GetMessgeByIdWithFromUserId#0" expanded="false" />
+            <element signature="n#!!block;n#AllMessge#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -536,7 +507,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#21#118#0" expanded="true" />
+            <element signature="e#21#114#0" expanded="true" />
+            <element signature="n#!!block;n#ReadMessge#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -546,7 +518,9 @@
         <state relative-caret-position="2508">
           <caret line="132" column="5" lean-forward="false" selection-start-line="132" selection-start-column="5" selection-end-line="132" selection-end-column="5" />
           <folding>
-            <element signature="e#16#99#0" expanded="true" />
+            <element signature="e#16#110#0" expanded="true" />
+            <element signature="n#!!block;n#GetMessgeByIdWithFromUserId#0" expanded="false" />
+            <element signature="n#!!block;n#AllMessge#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -575,13 +549,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/github.com/astaxie/beego/orm/orm.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="87" column="29" lean-forward="false" selection-start-line="87" selection-start-column="29" selection-end-line="87" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -642,13 +609,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="306" column="5" lean-forward="false" selection-start-line="306" selection-start-column="5" selection-end-line="306" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routers/commentsRouter_controllers.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1747">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -660,44 +621,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/from_user_id.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="8" />
-          <folding>
-            <element signature="e#21#118#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routers/router.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="28" column="36" lean-forward="false" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protos/message.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/db.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/user_msg.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="72" column="9" lean-forward="false" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -718,72 +645,129 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/default_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="22" column="37" lean-forward="false" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="46" />
+          <folding>
+            <element signature="e#14#189#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protos/message.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="70" column="1" lean-forward="false" selection-start-line="70" selection-start-column="1" selection-end-line="70" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/github.com/astaxie/beego/orm/orm.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="391" column="8" lean-forward="false" selection-start-line="391" selection-start-column="8" selection-end-line="391" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/github.com/astaxie/beego/orm/orm_queryset.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="262" column="9" lean-forward="false" selection-start-line="262" selection-start-column="9" selection-end-line="262" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/github.com/astaxie/beego/orm/types.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="164" column="4" lean-forward="false" selection-start-line="164" selection-start-column="4" selection-end-line="164" selection-end-column="4" />
+        <state relative-caret-position="236">
+          <caret line="127" column="11" lean-forward="false" selection-start-line="127" selection-start-column="11" selection-end-line="127" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/db_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="164" column="25" lean-forward="false" selection-start-line="164" selection-start-column="25" selection-end-line="164" selection-end-column="25" />
-          <folding>
-            <element signature="e#16#92#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="456">
+          <caret line="187" column="9" lean-forward="false" selection-start-line="187" selection-start-column="9" selection-end-line="187" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/site_messge.go">
+    <entry file="file://$PROJECT_DIR$/models/user_msg.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding>
-            <element signature="e#21#118#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="492">
+          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/to_user_id.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="68" column="45" lean-forward="false" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
+        <state relative-caret-position="714">
+          <caret line="60" column="17" lean-forward="false" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/user_messge.go">
+    <entry file="file://$PROJECT_DIR$/routers/commentsRouter_controllers.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="151" column="22" lean-forward="false" selection-start-line="151" selection-start-column="22" selection-end-line="151" selection-end-column="22" />
-          <folding>
-            <element signature="e#16#99#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-441">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/default_test.go">
+    <entry file="file://$PROJECT_DIR$/controllers/from_user_id.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="22" column="37" lean-forward="false" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="46" />
-          <folding>
-            <element signature="e#14#189#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="485">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="254">
-            <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <first_editor relative-caret-position="532">
+            <caret line="149" column="34" lean-forward="false" selection-start-line="149" selection-start-column="34" selection-end-line="149" selection-end-column="34" />
             <folding />
           </first_editor>
           <second_editor>
             <js_state />
           </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/site_messge.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="109" column="29" lean-forward="false" selection-start-line="109" selection-start-column="29" selection-end-line="109" selection-end-column="29" />
+          <folding>
+            <element signature="e#21#114#0" expanded="true" />
+            <element signature="n#!!block;n#ReadMessge#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/user_messge.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="321" column="11" lean-forward="false" selection-start-line="321" selection-start-column="11" selection-end-line="321" selection-end-column="11" />
+          <folding>
+            <element signature="e#16#110#0" expanded="true" />
+            <element signature="n#!!block;n#GetMessgeByIdWithFromUserId#0" expanded="false" />
+            <element signature="n#!!block;n#AllMessge#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routers/router.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="29" column="32" lean-forward="false" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -16,14 +16,32 @@ bmsg
 ```bash
 #/innerMsg/read/0
 /innerMsg/readDetail/7003714351?categoryId=0
+
 ```
+#####  读取消息
+```sh
+localhost:5008/v1/api/msg/read/to?pageSize=5&pageNumber=1&msgType=UNSEEN
+localhost:5008/v1/api/msg/read/to?pageSize=5&pageNumber=1&msgType=SEEN
+localhost:5008/v1/api/msg/read/to?pageSize=5&pageNumber=1&msgType=ALL
+post
+json:
+{
+    "pageSize": 5,
+    "pageNumber": 1,
+    "msgType": "SEEN",  #SEEN/UNSEEN/ALL/DETAIL
+    "id": -1,           #当msgType为DETAIL是，id有效
+    "FromUserId": 115,  #发信人
+    "toUserId": 0       #收件信
+}
+```
+
 ##### 4.分页设计
 ```bash
 https://notifications.console.aliyun.com/message/getMessageList.json?pageNumber=2&pageSize=10&status=1
 ```
 
 ##### 4.1 分页测试
-````sh
+```sh
 POST localhost:5008/v1/api/msg/read/to?pageSize=5&pageNumber=2
 {
     "from_user_id": 100,
@@ -70,4 +88,64 @@ POST localhost:5008/v1/api/msg/read/to?pageSize=5&pageNumber=2
     "err": "",
     "nums": 5
 }
+```
+
+#### API read  统一升级为post
+```sh
+localhost:5008/v1/api/msg/read
+DETAIL:
+{
+	"pageSize": 5,
+	"pageNumber": 1,
+	"id": 18,
+	"msgType": "DETAIL",
+    "FromUserId": 116,
+    "toUserId": 0
+}
+UNSEEN:
+{
+	"pageSize": 5,
+	"pageNumber": 1,
+	"id": 18,
+	"msgType": "UNSEEN",
+    "FromUserId": 116,
+    "toUserId": 0
+}
+SEEN:
+{
+	"pageSize": 5,
+	"pageNumber": 1,
+	"id": 18,
+	"msgType": "SEEN",
+    "FromUserId": 116,
+    "toUserId": 0
+}
+ALL:
+{
+	"pageSize": 5,
+	"pageNumber": 1,
+	"id": 18,
+	"msgType": "ALL",
+    "FromUserId": 116,
+    "toUserId": 0
+}
+```
+##### API create  统一升级为post
+```sh
+localhost:5008/v1/api/msg/create
+{
+    "FromUserId": 116,
+    "toUserId": 1,
+    "Title": "Welcome to join APKPURE developer 1",
+    "Message": "1.you xxx 2.xxxxx 3.xxxx"
+}
+```
+##### API update  统一升级为post
+```sh
+localhost:5008/v1/api/msg/update
+```
+
+##### API delete  统一升级为post
+```sh
+localhost:5008/v1/api/msg/delete/id
 ```

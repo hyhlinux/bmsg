@@ -71,3 +71,12 @@ WHERE "id" = $2
 FROM public.user_message
 LIMIT 1
 OFFSET 10;
+
+SELECT T0."id", T0."from_user_id", T0."to_user_id", T0."created_at", T0."update_at", T0."title", T0."message", T0."is_delete", T0."status" FROM "user_message" T0
+WHERE T0."to_user_id" = 0
+AND T0."from_user_id" = 116
+AND T0."status" = $3
+AND T0."is_delete" = $4
+ORDER BY T0."id" ASC
+LIMIT 5 OFFSET 20
+-- `0`, `116`, `UNSEEN`, `false`

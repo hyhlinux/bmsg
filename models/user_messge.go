@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"strings"
 	"fmt"
 	"bmsg/logger"
 
@@ -18,13 +19,16 @@ type ParamsList []interface{}
 
 //http json
 type MessgeJson struct {
+	PageNumber int 		`form:"pageNumber,omitempty"`
+	PageSize int		`form:"pageSize,omitempty"`
+	MsgType string      `form:"msgType,omitempty"`
 	Id int64   			`form:"id,omitempty"`
-	FromUserId int64    `form:"from_user_id,omitempty"`
-	ToUserId int64    	`form:"to_user_id,omitempty"`
+	FromUserId int64    `form:"fromUserId,omitempty"`
+	ToUserId int64    	`form:"toUserId,omitempty"`
 	Title       string         `form:"title,omitempty"`
 	Message     string         `form:"message,omitempty"`
 	Status      string         `form:"status,omitempty"`
-	IsDelete    bool         `form:"is_delete,omitempty"`
+	IsDelete    bool         `form:"isDelete,omitempty"`
 }
 
 type Messge struct {
@@ -61,6 +65,8 @@ var (
 		"1": "SEEN",
 		"UNSEEN": "UNSEEN",
 		"SEEN": "SEEN",
+		"ALL": "ALL",
+		"DETAIL": "DETAIL",
 		"DEF": "UNSEEN",
 	}
 	DefalutIsDelete = false
@@ -122,10 +128,12 @@ func GetMessgeByFromUserId(fromUserId int64, isDelete bool) (num int64, msgList 
 }
 
 func checkStatus(status string)  string{
+	status = strings.ToUpper(status)
 	if _, ok := StatusMap[status]; !ok {
+		logger.Warnf("src status:%v not exit", status)
 		status = StatusMap["DEF"]
 	}
-	return status
+	return StatusMap[status]
 }
 
 /*
@@ -137,51 +145,96 @@ func CheckPage(pageNumber int, pageSize int)  (offset int, limit int){
 		pageSize = 1000
 	}
 	if pageSize <= 0 {
-		pageSize = 1
+		pageSize = 5
 	}
 
 	if pageNumber <= 0 {
-		pageNumber = 1
+		pageNumber = 0
 	}
 
-	// todo
-	//if pageNumer >= 1000 {
-	//	pageNumer = 1000
-	//}
 	limit = pageSize
 	offset = (pageNumber-1)*pageSize
+	// todo delete
+	logger.Debugf("offset:%v limit:%v", offset, limit)
 	return offset, limit
 }
 
+func ReadMessge(statusType string, id, toUserId int64, pageNumber, pageSize int) (num int64, msgList []*Messge, err error) {
+	statusType = checkStatus(statusType)
+	switch statusType {
+	case StatusMap["DETAIL"]:
+		msg := &Messge{}
+		msg, err = GetMessgeById(id)
+		msgList = []*Messge{
+			msg,
+		}
+		break
+	default:
+		//StatusMap["ALL"], StatusMap["SEEN"], StatusMap["UNSEEN"]:
+		offset, limit := CheckPage(pageNumber, pageSize)
+		num, msgList, err = GetMessgeByToUser(toUserId, statusType, false, offset, limit)
+		break
+	}
+
+	return num, msgList, err
+}
+
+func ReadMessgeWithFromUserId(statusType string, id, toUserId, fromUserId int64, pageNumber, pageSize int) (num int64, msgList []*Messge, err error) {
+	statusType = checkStatus(statusType)
+	switch statusType {
+	case StatusMap["DETAIL"]:
+		msg := &Messge{}
+		msg, err = GetMessgeByIdWithFromUserId(id, fromUserId)
+		msgList = []*Messge{
+			msg,
+		}
+		break
+	default:
+		//StatusMap["ALL"], StatusMap["SEEN"], StatusMap["UNSEEN"]:
+		offset, limit := CheckPage(pageNumber, pageSize)
+		num, msgList, err = GetMessgeByToUserAll(toUserId, fromUserId, statusType, false, offset, limit)
+		break
+	}
+
+	return num, msgList, err
+}
+
 // 收信人查询
-func GetMessgeByToUser(toUserId int64, status string, isDelete bool, pageNumber, pageSize int) (num int64, msgList []*Messge, err error) {
+func GetMessgeByToUser(toUserId int64, status string, isDelete bool, offset, limit int) (num int64, msgList []*Messge, err error) {
+	status = checkStatus(status)
+	o := orm.NewOrm()
+	qs := o.QueryTable(TABLENAME)
+	qs = qs.Filter("to_user_id", toUserId).Filter("is_delete", isDelete)
+	if status != "ALL" {
+		qs = qs.Filter("status", status)
+	}
+	num, err = qs.OrderBy("id").Limit(limit, offset).All(&msgList)
+	if err != nil {
+		return -1, msgList, err
+	}
+	return num, msgList, nil
+}
+
+func GetMessgeByToUserAll(toUserId, fromUserId int64, status string, isDelete bool, offset, limit int) (num int64, msgList []*Messge, err error) {
 	status = checkStatus(status)
 	o := orm.NewOrm()
 	qs := o.QueryTable(TABLENAME)
 	//status 必须为SEEN/UNSEEN
-	offset, limit := CheckPage(pageNumber, pageSize)
-	//num, err = qs.Filter("to_user_id", toUserId).Filter("status", status).Filter("is_delete", isDelete).OrderBy("id").Limit(offset, limit).All(&msgList)
-	num, err = qs.Filter("to_user_id", toUserId).Filter("status", status).Filter("is_delete", isDelete).OrderBy("id").Limit(limit, offset).All(&msgList)
+	if status != "ALL" {
+		qs = qs.Filter("to_user_id", toUserId).Filter("from_user_id", fromUserId).Filter("status", status).Filter("is_delete", isDelete)
+	}
+
+	num, err = qs.OrderBy("id").Limit(limit, offset).All(&msgList)
 	if err != nil {
 		return -1, msgList, err
 	}
 
 	return num, msgList, nil
 }
-//todo 查看某个收件人的信息
-func GetMessgeByToUserAll(toUserId, fromUserId int64, status string, isDelete bool) (num int64, msgList []*Messge, err error) {
-	status = checkStatus(status)
-	o := orm.NewOrm()
-	qs := o.QueryTable(TABLENAME)
-	//status 必须为SEEN/UNSEEN
-	num, err = qs.Filter("to_user_id", toUserId).Filter("from_user_id", fromUserId).Filter("status", status).Filter("is_delete", isDelete).All(&msgList)
-	if err != nil {
-		return -1, msgList, err
-	}
 
-	return num, msgList, nil
-}
-
+/*
+不返回已经删除的msg
+*/
 func GetMessgeById(id int64) (msg *Messge, err error) {
 	m := Messge{Id: id}
 	o := orm.NewOrm()
@@ -203,8 +256,32 @@ func GetMessgeById(id int64) (msg *Messge, err error) {
 	return &m, nil
 }
 
+func GetMessgeByIdWithFromUserId(id int64, fromUserId int64) (msg *Messge, err error) {
+	m := Messge{Id: id}
+	o := orm.NewOrm()
+	o.Using("default")
+	err = o.Read(&m)
+	if err == orm.ErrNoRows {
+		s := fmt.Sprintf("query not found id: %v", id)
+		return nil, errors.New(s)
+	} else if err == orm.ErrMissPK {
+		s := fmt.Sprintf("query pk err:%v", err)
+		return nil, errors.New(s)
+	} else {
+		logger.Debugf("id:%v", m.Id)
+	}
+	// todo delete
+	if m.IsDelete {
+		return nil, errors.New(fmt.Sprintf("msg id:%v is not exist", m.Id))
+	}
+	if m.FromUserId != fromUserId {
+		return nil, errors.New(fmt.Sprintf("msg id:%v FromUserId:%v , but you want fromUserId:%v", m.Id, m.FromUserId, fromUserId))
+	}
+	return &m, nil
+}
+
 func UpdateMessge(mid int64, mm *Messge) (msg *Messge, err error) {
-	m, err  := GetMessgeById(mid);
+	m, err := GetMessgeById(mid);
 	if err != nil {
 		return nil, errors.New(fmt.Sprintf("Msg Not Exist mid:%v err:%v", mid, err))
 	}
@@ -226,7 +303,7 @@ func UpdateMessge(mid int64, mm *Messge) (msg *Messge, err error) {
 	}
 
 	if mm.Status != "" {
-		m.Status = mm.Status
+		m.Status = checkStatus(mm.Status)
 	}
 
 	o := orm.NewOrm()
