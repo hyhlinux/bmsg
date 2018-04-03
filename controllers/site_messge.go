@@ -124,7 +124,7 @@ func (o *MessgeController) DeleteMessge() {
 // @Param	to_user_id		query	int			true	"to_user_id"
 // @Param	title			query	string		true	"title"
 // @Param	message			query	string		true	"message"
-// @Param	status			query	int			true	"status"
+// @Param	status			query	string		true	"status"
 // @Param	is_delete		query	bool		true	"is_delete"
 // @Success 200 {int} models.Messge.Id
 // @Failure 400 arg is err

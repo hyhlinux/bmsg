@@ -38,11 +38,11 @@ func (o *ToUserIdController) Get() {
 }
 
 // @Title ShowToUserMessges
-// @Description update msg
-// @Param	body		body 	models.Messge	true	"The Messge content"
+// @Description Show msg
+// @Param	body		body 	models.MessgeJson	true	"The Messge content"
 // @Param	from_user_id	query	int			true	"from_user_id"
 // @Param	to_user_id		query	int			true	"to_user_id"
-// @Param	status			query	int			true	"status"
+// @Param	status			query	string		true	"status"
 // @Success 200 {int} models.Messge.Id
 // @Failure 400 arg is err
 // @router / [post]
@@ -55,6 +55,7 @@ func (o *ToUserIdController) ShowToUserMessges() {
 		o.Abort("400")
 		return
 	}
+	logger.Debugf("argJson:%v", argJson)
 
 	nums := int64(0)
 	msgList := []*models.Messge{}
@@ -64,7 +65,7 @@ func (o *ToUserIdController) ShowToUserMessges() {
 		nums, msgList, err = models.GetMessgeByToUser(argJson.ToUserId, argJson.Status, false)
 	}
 	if err != nil {
-		logger.Errorf("UpdateMessge err:%v argJson:%v", err, argJson)
+		logger.Errorf("ShowToUserMessges err:%v argJson:%v", err, argJson)
 		o.Data["json"] = err.Error()
 	}else{
 		o.Data["json"] = map[string]interface{}{
